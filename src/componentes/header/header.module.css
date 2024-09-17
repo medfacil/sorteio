@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: .6rem 2rem;
+  padding: .6rem 1.5rem .4rem 1rem;
 }
 
 .linklogo {
@@ -13,13 +13,11 @@
 }
 
 .logo {
-  width: 7rem;
+  width: 8rem;
   height: max-content;
 }
 
-
-@media (max-width: 768px) {
-  .header {
-    padding: .8rem 2rem .8rem 1rem;
-  }
+.link {
+  display: grid;
+  padding: .4rem;
 }

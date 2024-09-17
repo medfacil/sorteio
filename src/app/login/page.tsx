@@ -3,7 +3,6 @@ import { Lock, UserCircle } from "lucide-react";
 import { handleLogin } from "../actions";
 
 export default async function Login() {
-
   return (
     <div className={s.page}>
       <form action={handleLogin} className={s.form}>
@@ -21,7 +20,7 @@ export default async function Login() {
           </label>
           <input type="password" placeholder="Sua senha" id="password" name="password" className={s.input} required />
         </div>
-        <button type="submit" className={s.button}>Cadastrar</button>
+        <button type="submit" className={s.button}>Entrar</button>
       </form>
     </div>
   );

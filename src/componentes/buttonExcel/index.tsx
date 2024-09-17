@@ -10,7 +10,7 @@ interface Props {
 
 interface Iusers {
   name: string
-  number: number
+  number: string
   adress: string
   birth: Date
   createdAt: Date
@@ -31,7 +31,7 @@ export default function ButtonExcel({ users }: Props) {
   return (
     <button className={s.button}>
       <Sheet size={20} color='#ffff' />
-      <span onClick={handleExport}>Exportar para Excel</span>
+      <span onClick={handleExport}>Gerar Excel</span>
     </button>
   )
 }

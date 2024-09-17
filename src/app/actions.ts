@@ -29,7 +29,6 @@ export async function handleLogin(formData: FormData) {
   try {
     const findAdmin = await prisma.admin.findFirst({
       where: {
-        id: 1,
         username: username as string,
         password: password as string
       }

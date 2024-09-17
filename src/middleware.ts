@@ -6,13 +6,15 @@ export function middleware(req: NextRequest) {
   const publicRoutes = ['/', '/login'];
   const token = req.cookies.get('tokenSorteio')?.value;
   const pathname = req.nextUrl.pathname;
-  
+
+  // Permitir acesso às rotas públicas
   if (publicRoutes.includes(pathname)) {
     return NextResponse.next();
   }
 
-  if (!token) {
-    return NextResponse.redirect(new URL('/', req.url));
+  // Redirecionar para /login se o token não existir ou for 'undefined'
+  if (!token || token === 'undefined') {
+    return NextResponse.redirect(new URL('/login', req.url));
   }
 
   try {
@@ -21,15 +23,15 @@ export function middleware(req: NextRequest) {
     const currentTime = Math.floor(Date.now() / 1000);
 
     if (exp! < currentTime) {
-      const response = NextResponse.redirect(new URL('/sign-in', req.url));
-      response.cookies.delete('token');
+      const response = NextResponse.redirect(new URL('/login', req.url));
+      response.cookies.delete('tokenSorteio');
       return response;
     }
 
     return NextResponse.next();
   } catch (error) {
     console.error('Erro ao decodificar o JWT:', error);
-    return NextResponse.redirect(new URL('/sign-in', req.url));
+    return NextResponse.redirect(new URL('/login', req.url));
   }
 }
 

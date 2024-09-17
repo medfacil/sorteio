@@ -1,0 +1,18 @@
+.description {
+  font-size: .9rem;
+  padding: .2rem 0 .3rem 0;
+  color: var(--text);
+}
+
+.subtitle {
+  font-weight: 500;
+}
+
+.readMoreButton {
+  color: var(--primary);
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: .3rem;
+}
