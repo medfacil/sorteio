@@ -23,7 +23,8 @@ export default async function Home() {
           name: name as string,
           birth: new Date(nascimento.toString()) as Date,
           number: parseInt(whatsapp.toString()) as number,
-          adress: address as string
+          adress: address as string,
+          createdAt: new Date(),
         }
       })
 

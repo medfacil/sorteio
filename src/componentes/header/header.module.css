@@ -6,7 +6,20 @@
   padding: .6rem 2rem;
 }
 
+.linklogo {
+  display: grid;
+  height: max-content;
+  width: max-content;
+}
+
 .logo {
   width: 7rem;
   height: max-content;
+}
+
+
+@media (max-width: 768px) {
+  .header {
+    padding: .8rem 2rem .8rem 1rem;
+  }
 }

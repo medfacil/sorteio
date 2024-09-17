@@ -4,21 +4,24 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npx prisma migrate deploy && prisma generate && next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@prisma/client": "^5.19.1",
     "dayjs": "^1.11.13",
+    "file-saver": "^2.0.5",
     "jose": "^5.9.2",
     "lucide-react": "^0.441.0",
     "next": "14.2.11",
     "prisma": "^5.19.1",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@types/file-saver": "^2.0.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

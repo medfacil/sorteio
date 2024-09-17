@@ -7,7 +7,6 @@ export function middleware(req: NextRequest) {
   const token = req.cookies.get('tokenSorteio')?.value;
   const pathname = req.nextUrl.pathname;
   
-  console.log(token)
   if (publicRoutes.includes(pathname)) {
     return NextResponse.next();
   }
