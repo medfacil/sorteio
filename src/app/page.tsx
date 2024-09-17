@@ -1,95 +1,71 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { prisma } from "./lib";
+import s from "./page.module.css";
+import { CalendarDays, MapPinned, Smartphone, UserCircle } from "lucide-react";
+import Image from 'next/image'
+import raspouImage from '../../public/raspou_selo.png'
 
-export default function Home() {
+export default async function Home() {
+  async function submit(formData: FormData) {
+    'use server'
+
+    const name = formData.get('name')
+    const nascimento = formData.get('nascimento')
+    const whatsapp = formData.get('whatsapp')
+    const address = formData.get('address')
+
+    if (!name || !nascimento || !whatsapp || !address) {
+      return
+    }
+
+    try {
+      const newRegister = await prisma.user.create({
+        data: {
+          name: name as string,
+          birth: new Date(nascimento.toString()) as Date,
+          number: parseInt(whatsapp.toString()) as number,
+          adress: address as string
+        }
+      })
+
+      console.log(newRegister)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+    <div className={s.page}>
+      <Image src={raspouImage} alt="Raspou Selo" className={s.image} placeholder="blur" quality={100} />
+      <form action={submit} className={s.form}>
+        <div className={s.contentInput}>
+          <label htmlFor="name" className={s.label}>
+            <UserCircle size={20} color="var(--primary)" />  Nome Completo
+          </label>
+          <input type="text" placeholder="Seu Nome" id="name" name="name" className={s.input} required />
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <div className={s.contentInput}>
+          <label htmlFor="nascimento" className={s.label}>
+            <CalendarDays size={20} color="var(--primary)" />
+            Data de Nascimento
+          </label>
+          <input type="date" id="nascimento" name="nascimento" placeholder="DD-MM-AAAA" className={s.input} required />
+        </div>
+        <div className={s.contentInput}>
+          <label htmlFor="whatsapp" className={s.label}>
+            <Smartphone size={20} color="var(--primary)" />
+            Numero WhatsApp
+          </label>
+          <input type="tel" placeholder="Seu Whatsapp" id="whatsapp" name="whatsapp" className={s.input} required />
+        </div>
+        <div className={s.contentInput}>
+          <label htmlFor="address" className={s.label}>
+            <MapPinned size={20} color="var(--primary)" />
+            Endereço
+          </label>
+          <input type="text" placeholder="Seu Endereço" id="address" name="address" className={s.input} required />
+        </div>
+        <button type="submit" className={s.button}>Cadastrar</button>
+      </form>
     </div>
   );
 }
