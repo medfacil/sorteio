@@ -55,7 +55,11 @@
 .input[type="date"] {
   color: gray !important;
   width: 100% !important;
+  min-height: 2rem;
   background-color: transparent !important;
+}
+.input[type="date"]::placeholder {
+  color: gray !important;
 }
 
 .input::-webkit-calendar-picker-indicator {
