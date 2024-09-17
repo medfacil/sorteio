@@ -52,8 +52,10 @@
   width: 100%;
 }
 
-.input[type="date"]:invalid {
-  color: gray;
+.input[type="date"] {
+  color: gray !important;
+  width: 100% !important;
+  background-color: transparent !important;
 }
 
 .input::-webkit-calendar-picker-indicator {
