@@ -53,9 +53,10 @@
 }
 
 .input[type="date"] {
+  appearance: none;
   color: gray !important;
   width: 100% !important;
-  min-height: 2rem;
+  min-height: 2.3rem;
   background-color: transparent !important;
 }
 .input[type="date"]::placeholder {

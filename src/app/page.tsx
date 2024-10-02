@@ -55,7 +55,7 @@ export default function Home() {
 
   return (
     <div className={s.page}>
-      <Image src={imagefundo} alt="Raspou, achou, ganhou!" className={s.image} placeholder="blur" quality={100} />
+      <Image src={imagefundo} alt="Raspou, achou, ganhou!" className={s.image} placeholder="blur" quality={100} priority />
       <form onSubmit={submit} className={s.form}>
         <div className={s.contentInput}>
           <label htmlFor="name" className={s.label}>
