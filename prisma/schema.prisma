@@ -19,6 +19,7 @@ model User {
   birth     DateTime
   number    String
   adress    String
+  cpf       String?
   createdAt DateTime @default(now())
 }
 

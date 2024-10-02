@@ -1,7 +1,7 @@
 'use client';
 import { toastConfig } from "@/utils/toast";
 import s from "./page.module.css";
-import { CalendarDays, MapPinned, Smartphone, UserCircle } from "lucide-react";
+import { CalendarDays, IdCard, MapPinned, Smartphone, UserCircle } from "lucide-react";
 import Image from 'next/image'
 import { useState } from "react";
 import { toast } from "react-toastify";
@@ -13,6 +13,7 @@ export default function Home() {
   const [nascimento, setNascimento] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
   const [endereço, setEndereço] = useState('');
+  const [cpf, setCpf] = useState('');
   const [loading, setLoading] = useState(false);
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -24,7 +25,7 @@ export default function Home() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, nascimento, whatsapp, endereço }),
+        body: JSON.stringify({ name, nascimento, whatsapp, endereço, cpf }),
       })
 
       if (!response.ok) {
@@ -53,6 +54,15 @@ export default function Home() {
     }
   }
 
+  const maskCPF = (value: string) => {
+    return value
+    .replace(/\D/g, "") // Remove qualquer caractere não numérico
+    .replace(/(\d{3})(\d)/, "$1.$2") // Adiciona o primeiro ponto
+    .replace(/(\d{3})(\d)/, "$1.$2") // Adiciona o segundo ponto
+    .replace(/(\d{3})(\d{1,2})/, "$1-$2") // Adiciona o traço
+    .replace(/(-\d{2})\d+?$/, "$1");
+  };
+
   return (
     <div className={s.page}>
       <Image src={imagefundo} alt="Raspou, achou, ganhou!" className={s.image} placeholder="blur" quality={100} priority />
@@ -71,6 +81,24 @@ export default function Home() {
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div className={s.contentInput}>
+          <label htmlFor="cpf" className={s.label}>
+            <IdCard size={20} color="var(--primary)" />
+            CPF
+          </label>
+          <input
+            type="text"
+            placeholder="seu cpf"
+            id="cpf"
+            name="cpf"
+            min={15}
+            inputMode="numeric"
+            className={s.input}
+            required
+            value={cpf}
+            onChange={(e) => setCpf(maskCPF(e.target.value))}
           />
         </div>
         <div className={s.contentInput}>

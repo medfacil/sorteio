@@ -5,9 +5,9 @@ async function handler(req: Request) {
   if (req.method !== 'POST') {
     return NextResponse.json({ error: 'Método não permitido' }, { status: 405 })
   }
-  const { name, nascimento, whatsapp, endereço } = await req.json();
+  const { name, nascimento, whatsapp, endereço, cpf } = await req.json();
 
-  if (!name || !nascimento || !whatsapp || !endereço) {
+  if (!name || !nascimento || !whatsapp || !endereço || !cpf) {
     throw new Error('Todos os campos devem ser preenchidos');
   }
 
@@ -17,7 +17,8 @@ async function handler(req: Request) {
         name: name,
         birth: new Date(nascimento),
         number: whatsapp,
-        adress: endereço
+        adress: endereço,
+        cpf: cpf
       }
     })
 

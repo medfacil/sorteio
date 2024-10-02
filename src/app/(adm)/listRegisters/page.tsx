@@ -3,7 +3,6 @@ import s from './listRegisters.module.css'
 import { formatedDate } from '@/utils/date'
 import { notFound } from 'next/navigation'
 import ButtonExcel from '@/componentes/buttonExcel'
-import { UserCircle } from 'lucide-react'
 
 export default async function ListRegisters() {
   const users = await prisma.user.findMany()
