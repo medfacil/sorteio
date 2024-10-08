@@ -9,10 +9,12 @@ interface Props {
 }
 
 interface Iusers {
+  id: number
   name: string
   number: string
   adress: string
   birth: Date
+  cpf: string | null
   createdAt: Date
 }
 
